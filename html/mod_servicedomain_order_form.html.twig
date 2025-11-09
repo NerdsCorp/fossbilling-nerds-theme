@@ -1,0 +1,323 @@
+{% set periods = guest.system_periods %}
+{% set pricing = product.pricing %}
+{% set transfer_tlds = guest.serviceDomain_tlds({ "allow_transfer": 1 })%}
+<style>
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: hidden; /* Prevent unnecessary horizontal scrolling */
+    }
+
+    /* Ensure that table layout switches to block only on mobile */
+    .table-responsive table, 
+    .table-responsive thead, 
+    .table-responsive tbody, 
+    .table-responsive th, 
+    .table-responsive td, 
+    .table-responsive tr {
+        display: block;
+        width: 100%;
+    }
+
+    .table-responsive thead {
+        display: none; /* Hide the original table headers on mobile */
+    }
+
+    .table-responsive tbody tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px;
+        width: 100%; /* Ensure rows take full width */
+    }
+
+    .table-responsive tbody td {
+        display: block;
+        position: relative;
+        padding-left: 40%; /* Adjust space for labels */
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #dee2e6;
+        width: 100%; /* Ensure cells take full width */
+        box-sizing: border-box;
+        text-align: right;
+    }
+
+    .table-responsive tbody td::before {
+        content: attr(data-label); /* Display header label */
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-weight: bold;
+        color: #495057;
+        white-space: nowrap;
+        text-align: left;
+        width: 30%;
+        box-sizing: border-box;
+    }
+
+    .table-responsive tbody td:last-child {
+        border-bottom: none; /* Remove bottom border from the last cell */
+    }
+}
+</style>
+
+<div class="card">
+    <div class="card-body" id="register">
+    {% if guest.extension_is_on({"mod":"domainsbot"}) %}
+        <div class="text-center mt-3">
+            <p class="text-muted d-inline">{{ 'Need ideas? Explore:'|trans }}</p>
+            <a href="/domainsbot" class="btn btn-sm btn-outline-primary ms-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /><path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /><path d="M9.7 17l4.6 0" /></svg> {{ 'Domain Suggestions'|trans }}
+            </a>
+        </div>
+    {% endif %}
+        <form id="domain-search-transfer-form">
+            <div class="row g-0 mb-3 {% if guest.extension_is_on({"mod":"domainsbot"}) %}mt-6{% endif %}">
+                <div class="col-12 col-md-8">
+                    <input type="text" class="form-control form-control-lg" placeholder="Enter your domain name" aria-label="Domain Name" name="domain_name" value="{{ request.domain_name }}" autocapitalize="none" required>
+                </div>
+                <div class="col-12 col-md-4 d-md-flex">
+                    <button class="btn btn-primary btn-lg w-100 mt-2 mt-md-0 ms-md-2" type="button" id="domain-check">{{ 'Search'|trans }}</button>
+                    {% if transfer_tlds is not empty %}
+                        <button class="btn btn-success btn-lg w-100 ms-md-2 mt-2 mt-md-0" type="button" id="transfer-check">{{ 'Transfer'|trans }}</button>
+                    {% endif %}
+                    <select class="form-select form-select-lg w-100 mt-2 mt-md-0 ms-md-2 onAfterDomainCheck" name="register_years" id="registration-years" style="display:none;"></select>
+                    <input type="text" class="form-control mt-2 mt-md-0 ms-md-2" name="transfer_code" value="{{ request.transfer_code }}" placeholder="{{ 'Enter domain transfer code'|trans }}" id="domain-transfer-config" style="display:none;" />
+                    <span id="transfer-price" class="text-center align-self-center mt-2 mt-md-0 ms-md-2" style="display:none; display:block; margin-top: 8px;"></span>
+                </div>
+            </div>
+            <p class="text-muted text-center mt-4" id="info-text">Search for your perfect domain name{% if transfer_tlds is not empty %} or transfer an existing one{% endif %}.</p>
+            <input type="hidden" name="id" value="{{ product.id }}" />
+            <input type="hidden" name="register_tld" value="" />
+            <input type="hidden" name="register_sld" value="" />
+            <input type="hidden" name="transfer_tld" value="" />
+            <input type="hidden" name="transfer_sld" value="" />
+            <input type="hidden" name="action" value="" />
+            <div class="mb-3 onAfterDomainCheck2" style="display:none;">
+                <label class="form-check">
+                <input class="form-check-input" type="checkbox" onclick="$('#nameservers').slideToggle();">
+                <span class="form-check-label">{{ 'I want to use my nameservers'|trans }}</span>
+                </label>
+            </div>
+            <div class="mb-3" id="nameservers" style="display:none; margin: 10px 0;">
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="ns1" value="" placeholder="{{ 'Nameserver 1'|trans }}"/>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="ns2" value="" placeholder="{{ 'Nameserver 2'|trans }}"/>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="ns3" value="" placeholder="{{ 'Nameserver 3'|trans }}"/>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="ns4" value="" placeholder="{{ 'Nameserver 4'|trans }}"/>
+                </div>
+            </div>
+            <div class="mb-3" id="config-next-domain">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M7 7l5 5l-5 5"></path>
+                        <path d="M13 7l5 5l-5 5"></path>
+                    </svg>
+                    {{ 'Next'|trans }}
+                </button>
+            </div>
+            <div class="mb-3" id="config-next-domain2">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M7 7l5 5l-5 5"></path>
+                        <path d="M13 7l5 5l-5 5"></path>
+                    </svg>
+                    {{ 'Next'|trans }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% set currency = guest.cart_get_currency %}
+<div class="card mt-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ 'Domain'|trans }}</th>
+                        <th>{{ 'Registration'|trans }}</th>
+                        <th>{{ 'Renewal'|trans }}</th>
+                        <th>{{ 'Transfer'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tld, details in pricing %}
+                        {% if details.active == 1 %}
+                            <tr>
+                                <td data-label="{{ 'Domain'|trans }}">{{ tld }}</td>
+                                <td data-label="{{ 'Registration'|trans }}">
+                                    {% if details.allow_register == 1 %}
+                                        {{ currency.format|replace({'{{price}}': details.price_registration}) }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td data-label="{{ 'Renewal'|trans }}">
+                                    {{ currency.format|replace({'{{price}}': details.price_renew}) }}
+                                </td>
+                                <td data-label="{{ 'Transfer'|trans }}">
+                                    {% if details.allow_transfer == 1 %}
+                                        {{ currency.format|replace({'{{price}}': details.price_transfer}) }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        // Prefill the search input on domain checker page
+        let storedDomain = localStorage.getItem("selected_domain");
+
+        if (storedDomain) {
+            let searchInput = document.querySelector("input[name='domain_name']");
+            if (searchInput) {
+                searchInput.value = storedDomain; // Autofill the input field
+                localStorage.removeItem("selected_domain"); // Clear after use
+            }
+        }
+    });
+
+   $(function() {
+       $('#config-next').hide();
+       $('#config-next-domain').hide();
+       $('#config-next-domain2').hide();
+   
+       if ($(".addons").length) {
+           $('.order-button').one('click', function() {
+               $(this).hide();
+               $('.addons').slideDown('fast');
+   
+               return false;
+           });
+       }
+   
+       $('.addon-period-selector').on('change',function() {
+           var r = $(this).attr('rel');
+   
+           $('#' + r + ' span').hide();
+           $('#' + r + ' span.' + $(this).val()).fadeIn();
+       }).trigger('change');
+   
+       $('#transfer-check').on('click', function(event) {
+           var domain = $('input[name="domain_name"]').val();
+           const parts = domain.split('.');
+           let sld = '';
+           let tld = '';
+           if (parts.length >= 3) {
+               // Assume the last two parts make up the TLD (e.g., .in.ua, .co.uk)
+               sld = parts.slice(0, -2).join('.');
+               tld = '.' + parts.slice(-2).join('.');
+           } else if (parts.length === 2) {
+               // For typical two-part domains (e.g., example.com)
+               sld = parts[0];
+               tld = '.' + parts[1];
+           }
+           $('input[name="transfer_sld"]').val(sld);
+           $('input[name="transfer_tld"]').val(tld);
+           $('input[name="action"]').val('transfer');
+           bb.post(
+               'guest/servicedomain/can_be_transferred',
+               { sld: sld, tld: tld },
+               function(result) {
+                   setTransferPricing(tld);
+                   $('#domain-name').text(domain);
+                   $('input[name="domain_name"]').attr('readonly', true);
+                   $('#transfer-price').fadeIn('fast');
+                   $('#domain-transfer-config').fadeIn('fast').attr('required', true);
+                   $('#info-text').hide();
+                   $('#domain-check').hide();
+                   $('#transfer-check').hide();
+                   $('#register .order-button').show();
+               }
+           );
+   
+           return false;
+       });
+   
+       $('#domain-check').on('click', function(event) {
+           var domain = $('input[name="domain_name"]').val();
+           const parts = domain.split('.');
+           let sld = '';
+           let tld = '';
+           if (parts.length >= 3) {
+               // Assume the last two parts make up the TLD (e.g., .in.ua, .co.uk)
+               sld = parts.slice(0, -2).join('.');
+               tld = '.' + parts.slice(-2).join('.');
+           } else if (parts.length === 2) {
+               // For typical two-part domains (e.g., example.com)
+               sld = parts[0];
+               tld = '.' + parts[1];
+           }
+           $('input[name="register_sld"]').val(sld);
+           $('input[name="register_tld"]').val(tld);
+           $('input[name="action"]').val('register');
+           bb.post(
+               'guest/servicedomain/check',
+               { sld: sld, tld: tld },
+               function(result) {
+                   setPricing(tld);
+                   $('#domain-name').text(domain);
+                   $('input[name="domain_name"]').attr('readonly', true);
+                   $('.onAfterDomainCheck').fadeIn('fast');
+                   $('.onAfterDomainCheck2').fadeIn('fast');
+                   $('#domain-check').hide();
+                   $('#transfer-check').hide();
+                   $('#info-text').hide();
+                   $('#register .order-button').show();
+               }
+           );
+   
+           return false;
+       });
+   
+       function setPricing(tld)
+       {
+           bb.post(
+               'guest/servicedomain/pricing',
+               { tld: tld },
+               function(result) {
+                   var s = $("#registration-years");
+                   s.find('option').remove();
+                   for (i = 1; i < 6; i++) {
+                       var price = bb.currency(result.price_registration, {{ currency.conversion_rate }}, "₴", i);
+   
+                       s.append(new Option(i + "{{ ' Year/s @ '|trans }}" + price, i));
+                   }
+                   $('#config-next-domain').show();
+               }
+           );
+       }
+   
+       function setTransferPricing(tld) {
+           bb.post(
+               'guest/servicedomain/pricing',
+               { tld: tld },
+               function(result) {
+                   var price = bb.currency(result.price_transfer, {{ currency.conversion_rate }}, "{{ currency.code }}");
+   
+                   $('#transfer-price').text(price);
+                   $('#config-next-domain2').show();
+               }
+           );
+       }
+   });
+</script>
