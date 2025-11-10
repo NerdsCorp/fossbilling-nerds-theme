@@ -166,7 +166,7 @@ body {
     transform: translateY(-2px) !important;
 }
 
-.nav-link::after {
+.nav-link:not(.dropdown-toggle)::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -177,8 +177,13 @@ body {
     transition: width 0.3s ease;
 }
 
-.nav-link:hover::after {
+.nav-link:not(.dropdown-toggle):hover::after {
     width: 100%;
+}
+
+/* Ensure dropdown toggles don't get the underline animation */
+.nav-link.dropdown-toggle::after {
+    display: none !important;
 }
 
 /* Dropdown Menus */
@@ -189,16 +194,27 @@ body {
     backdrop-filter: blur(10px) !important;
     overflow: visible !important;
     max-height: none !important;
+    margin-top: 8px !important;
+    padding: 8px 0 !important;
 }
 
 .dropdown-item {
     color: var(--light-text) !important;
     transition: all 0.3s ease !important;
+    padding: 10px 20px !important;
+    border: none !important;
+    border-bottom: none !important;
 }
 
 .dropdown-item:hover {
     background: rgba(72, 177, 223, 0.2) !important;
     color: var(--primary-color) !important;
+}
+
+.dropdown-item:focus {
+    background: rgba(72, 177, 223, 0.15) !important;
+    color: var(--primary-color) !important;
+    outline: none !important;
 }
 
 /* Forms */
@@ -722,11 +738,15 @@ p, span, div, h1, h2, h3, h4, h5, h6 {
     padding: 15px !important;
 }
 
-/* Dropdown items */
+/* Additional dropdown item text overflow handling */
 .dropdown-item {
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
     white-space: normal !important;
+    line-height: 1.5 !important;
+    min-height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 /* Alert boxes */
