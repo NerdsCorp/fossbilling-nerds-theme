@@ -1,32 +1,635 @@
-/* Tide template custom CSS style v1.0 */
-/* Using the examples, provide your own styling */
+/* NerdsCorp Dark Theme with Rounded Edges v2.0 */
+/* Based on dark modern design with primary color #48B1DF */
 
-/*
+:root {
+    --primary-color: #48B1DF;
+    --secondary-color: #2a95be;
+    --dark-bg: #000;
+    --card-bg: rgba(34, 34, 34, 0.9);
+    --light-text: #ffffff;
+    --gray-text: #ccc;
+    --border-radius: 15px;
+    --border-radius-lg: 20px;
+    --border-radius-sm: 10px;
+}
+
+/* Force dark theme */
+body {
+    background: var(--dark-bg) !important;
+    color: var(--light-text) !important;
+}
+
+/* Apply dark theme globally */
+body[data-bs-theme="dark"],
+body {
+    --tblr-body-bg: #000 !important;
+    --tblr-bg-surface: rgba(34, 34, 34, 0.9) !important;
+    --tblr-border-color: rgba(72, 177, 223, 0.2) !important;
+}
+
+/* Primary Color Overrides */
 .bg-primary {
-     background-color: #your-color !important;
+    background-color: var(--primary-color) !important;
 }
+
 .text-primary {
-     color: #your-color !important;
+    color: var(--primary-color) !important;
 }
+
+.border-primary {
+    border-color: var(--primary-color) !important;
+}
+
+/* Buttons - Primary with Gradient */
 .btn-primary {
-     background-color: #your-color !important;
-     border-color: #your-color !important;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 12px 30px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 5px 15px rgba(72, 177, 223, 0.3) !important;
+    color: var(--light-text) !important;
 }
+
 .btn-primary:hover {
-     background-color: #your-hover-color !important;
-     border-color: #your-hover-color !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(72, 177, 223, 0.5) !important;
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color)) !important;
+    color: var(--light-text) !important;
 }
-.btn-primary:focus {
-     background-color: #your-focus-color !important;
-     border-color: #your-focus-color !important;
-     box-shadow: 0 0 0 0.2rem rgba(#your-color, 0.5) !important;
-}
+
+.btn-primary:focus,
 .btn-primary:active {
-     background-color: #your-active-color !important;
-     border-color: #your-active-color !important;
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color)) !important;
+    box-shadow: 0 0 0 0.2rem rgba(72, 177, 223, 0.5) !important;
+    color: var(--light-text) !important;
 }
-.btn-primary:disabled {
-     background-color: #your-disabled-color !important;
-     border-color: #your-disabled-color !important;
+
+/* Secondary Buttons */
+.btn-secondary,
+.btn-outline-primary {
+    border: 2px solid var(--primary-color) !important;
+    color: var(--primary-color) !important;
+    background: transparent !important;
+    border-radius: 50px !important;
+    padding: 12px 30px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
 }
-*/
+
+.btn-secondary:hover,
+.btn-outline-primary:hover {
+    background: var(--primary-color) !important;
+    color: var(--light-text) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(72, 177, 223, 0.5) !important;
+}
+
+/* Other Buttons with Rounded Corners */
+.btn {
+    border-radius: 50px !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn:hover {
+    transform: translateY(-2px) !important;
+}
+
+/* Cards with Rounded Edges */
+.card {
+    background: var(--card-bg) !important;
+    border-radius: var(--border-radius-lg) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    transition: all 0.3s ease !important;
+    color: var(--light-text) !important;
+}
+
+.card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 35px rgba(72, 177, 223, 0.3) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.card-header {
+    background: rgba(72, 177, 223, 0.1) !important;
+    border-bottom: 1px solid rgba(72, 177, 223, 0.2) !important;
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0 !important;
+    color: var(--light-text) !important;
+}
+
+.card-footer {
+    background: rgba(72, 177, 223, 0.05) !important;
+    border-top: 1px solid rgba(72, 177, 223, 0.2) !important;
+    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg) !important;
+}
+
+.card-body {
+    color: var(--light-text) !important;
+}
+
+.card-title {
+    color: var(--light-text) !important;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 2px solid var(--primary-color) !important;
+    transition: all 0.3s ease !important;
+}
+
+.navbar-brand {
+    color: var(--primary-color) !important;
+    font-weight: 700 !important;
+}
+
+.nav-link {
+    color: var(--light-text) !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+    transform: translateY(-2px) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Dropdown Menus */
+.dropdown-menu {
+    background: var(--card-bg) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    border-radius: var(--border-radius) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.dropdown-item {
+    color: var(--light-text) !important;
+    transition: all 0.3s ease !important;
+}
+
+.dropdown-item:hover {
+    background: rgba(72, 177, 223, 0.2) !important;
+    color: var(--primary-color) !important;
+}
+
+/* Forms */
+.form-control,
+.form-select {
+    background: rgba(34, 34, 34, 0.9) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    border-radius: var(--border-radius-sm) !important;
+    color: var(--light-text) !important;
+    transition: all 0.3s ease !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: rgba(34, 34, 34, 0.95) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 0.2rem rgba(72, 177, 223, 0.25) !important;
+    color: var(--light-text) !important;
+}
+
+.form-control::placeholder {
+    color: var(--gray-text) !important;
+}
+
+.form-label {
+    color: var(--light-text) !important;
+    font-weight: 500 !important;
+}
+
+/* Input Groups */
+.input-group-text {
+    background: rgba(72, 177, 223, 0.1) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    color: var(--primary-color) !important;
+    border-radius: var(--border-radius-sm) !important;
+}
+
+/* Tables */
+.table {
+    color: var(--light-text) !important;
+    border-color: rgba(72, 177, 223, 0.2) !important;
+}
+
+.table thead th {
+    background: rgba(72, 177, 223, 0.1) !important;
+    border-color: rgba(72, 177, 223, 0.2) !important;
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+}
+
+.table tbody tr {
+    border-color: rgba(72, 177, 223, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+.table tbody tr:hover {
+    background: rgba(72, 177, 223, 0.05) !important;
+}
+
+.table td {
+    color: var(--light-text) !important;
+}
+
+/* Badges */
+.badge {
+    border-radius: 20px !important;
+    padding: 5px 12px !important;
+    font-weight: 600 !important;
+}
+
+.badge-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) !important;
+}
+
+/* Alerts */
+.alert {
+    border-radius: var(--border-radius) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.alert-info {
+    background: rgba(72, 177, 223, 0.1) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+/* Modals */
+.modal-content {
+    background: var(--card-bg) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    border-radius: var(--border-radius-lg) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(72, 177, 223, 0.2) !important;
+    background: rgba(72, 177, 223, 0.05) !important;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(72, 177, 223, 0.2) !important;
+    background: rgba(72, 177, 223, 0.05) !important;
+}
+
+.modal-title {
+    color: var(--primary-color) !important;
+}
+
+/* Pagination */
+.pagination .page-link {
+    background: var(--card-bg) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    color: var(--light-text) !important;
+    border-radius: var(--border-radius-sm) !important;
+    margin: 0 3px !important;
+    transition: all 0.3s ease !important;
+}
+
+.pagination .page-link:hover {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--light-text) !important;
+    transform: translateY(-2px) !important;
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* List Groups */
+.list-group-item {
+    background: var(--card-bg) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    color: var(--light-text) !important;
+    transition: all 0.3s ease !important;
+}
+
+.list-group-item:hover {
+    background: rgba(72, 177, 223, 0.1) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Progress Bars */
+.progress {
+    background: rgba(34, 34, 34, 0.9) !important;
+    border-radius: 50px !important;
+    overflow: hidden !important;
+}
+
+.progress-bar {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) !important;
+}
+
+/* Tabs */
+.nav-tabs {
+    border-bottom: 2px solid rgba(72, 177, 223, 0.2) !important;
+}
+
+.nav-tabs .nav-link {
+    border: none !important;
+    color: var(--gray-text) !important;
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0 !important;
+    transition: all 0.3s ease !important;
+}
+
+.nav-tabs .nav-link:hover {
+    background: rgba(72, 177, 223, 0.1) !important;
+    color: var(--primary-color) !important;
+}
+
+.nav-tabs .nav-link.active {
+    background: rgba(72, 177, 223, 0.1) !important;
+    color: var(--primary-color) !important;
+    border-bottom: 2px solid var(--primary-color) !important;
+}
+
+/* Accordions */
+.accordion-item {
+    background: var(--card-bg) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    border-radius: var(--border-radius) !important;
+    margin-bottom: 10px !important;
+}
+
+.accordion-button {
+    background: rgba(72, 177, 223, 0.05) !important;
+    color: var(--light-text) !important;
+    border-radius: var(--border-radius) !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background: rgba(72, 177, 223, 0.1) !important;
+    color: var(--primary-color) !important;
+}
+
+.accordion-body {
+    background: var(--card-bg) !important;
+    color: var(--light-text) !important;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    background: var(--card-bg) !important;
+    border-radius: var(--border-radius) !important;
+    padding: 12px 20px !important;
+}
+
+.breadcrumb-item a {
+    color: var(--primary-color) !important;
+}
+
+.breadcrumb-item.active {
+    color: var(--gray-text) !important;
+}
+
+/* Toast Notifications */
+.toast {
+    background: var(--card-bg) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    border-radius: var(--border-radius) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.toast-header {
+    background: rgba(72, 177, 223, 0.1) !important;
+    color: var(--light-text) !important;
+}
+
+.toast-body {
+    color: var(--light-text) !important;
+}
+
+/* Sidebar */
+.sidebar,
+.offcanvas {
+    background: rgba(0, 0, 0, 0.95) !important;
+    border-right: 1px solid rgba(72, 177, 223, 0.2) !important;
+}
+
+.sidebar-item,
+.offcanvas-body {
+    color: var(--light-text) !important;
+}
+
+/* Footer */
+.footer {
+    background: #111 !important;
+    border-top: 2px solid var(--primary-color) !important;
+    color: var(--gray-text) !important;
+}
+
+/* Page Background */
+.page {
+    background: var(--dark-bg) !important;
+}
+
+/* Text Colors */
+.text-muted {
+    color: var(--gray-text) !important;
+}
+
+.text-white {
+    color: var(--light-text) !important;
+}
+
+/* Links */
+a {
+    color: var(--primary-color) !important;
+    transition: all 0.3s ease !important;
+}
+
+a:hover {
+    color: var(--secondary-color) !important;
+    text-decoration: none !important;
+}
+
+/* Pricing Cards - Special Styling */
+.pricing-card {
+    background: var(--card-bg) !important;
+    border-radius: var(--border-radius-lg) !important;
+    padding: 40px !important;
+    text-align: center !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    transition: all 0.3s ease !important;
+    height: 100% !important;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 20px 40px rgba(72, 177, 223, 0.4) !important;
+}
+
+/* Stats/Feature Boxes */
+.stat-card,
+.feature-box {
+    background: var(--card-bg) !important;
+    border-radius: var(--border-radius) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+.stat-card:hover,
+.feature-box:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 35px rgba(72, 177, 223, 0.3) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Shadows */
+.shadow {
+    box-shadow: 0 10px 30px rgba(72, 177, 223, 0.2) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 15px 40px rgba(72, 177, 223, 0.3) !important;
+}
+
+/* Spinners/Loaders */
+.spinner-border {
+    border-color: var(--primary-color) !important;
+    border-right-color: transparent !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(34, 34, 34, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Responsive Tables */
+.table-responsive {
+    border-radius: var(--border-radius) !important;
+    background: var(--card-bg) !important;
+}
+
+/* Icons */
+.icon {
+    color: var(--primary-color) !important;
+}
+
+/* Status Indicators */
+.status-indicator {
+    border-radius: 50% !important;
+}
+
+.status-green {
+    background: #28a745 !important;
+}
+
+.status-red {
+    background: #dc3545 !important;
+}
+
+.status-yellow {
+    background: #ffc107 !important;
+}
+
+/* Empty States */
+.empty {
+    color: var(--gray-text) !important;
+}
+
+/* Dividers */
+.hr,
+hr {
+    border-color: rgba(72, 177, 223, 0.2) !important;
+}
+
+/* Box Elements */
+.box {
+    background: var(--card-bg) !important;
+    border-radius: var(--border-radius) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+}
+
+/* Dashboard Specific */
+.dashboard-card {
+    background: var(--card-bg) !important;
+    border-radius: var(--border-radius-lg) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    padding: 25px !important;
+    transition: all 0.3s ease !important;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 35px rgba(72, 177, 223, 0.3) !important;
+}
+
+/* Override any light backgrounds */
+.bg-white,
+.bg-light {
+    background: var(--card-bg) !important;
+}
+
+/* Ensure text is readable on dark backgrounds */
+.text-dark {
+    color: var(--light-text) !important;
+}
+
+/* Make sure checkboxes and radios are visible */
+.form-check-input {
+    background-color: rgba(34, 34, 34, 0.9) !important;
+    border-color: rgba(72, 177, 223, 0.5) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Select2 dropdown styling if used */
+.select2-container--default .select2-selection--single {
+    background: var(--card-bg) !important;
+    border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    border-radius: var(--border-radius-sm) !important;
+}
+
+/* Smooth Transitions */
+* {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
+}
+
+/* Remove transitions for immediate changes */
+button,
+input[type="submit"],
+input[type="button"] {
+    transition: all 0.3s ease !important;
+}
