@@ -105,7 +105,7 @@ body {
     transition: all 0.3s ease !important;
     color: var(--light-text) !important;
     min-height: 150px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 
 .card:hover {
@@ -187,6 +187,8 @@ body {
     border: 1px solid rgba(72, 177, 223, 0.2) !important;
     border-radius: var(--border-radius) !important;
     backdrop-filter: blur(10px) !important;
+    overflow: visible !important;
+    max-height: none !important;
 }
 
 .dropdown-item {
@@ -352,7 +354,7 @@ body {
 .progress {
     background: rgba(34, 34, 34, 0.9) !important;
     border-radius: 50px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 
 .progress-bar {
@@ -559,6 +561,8 @@ a:hover {
 .table-responsive {
     border-radius: var(--border-radius) !important;
     background: var(--card-bg) !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
 }
 
 /* Icons */
@@ -651,9 +655,10 @@ hr {
     border-radius: var(--border-radius-sm) !important;
 }
 
-/* Smooth Transitions */
-* {
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
+/* Smooth Transitions - Applied to specific elements only to avoid breaking animations */
+.card, .btn, .nav-link, .dropdown-item, .list-group-item, .table tbody tr,
+.form-control, .form-select, .pagination .page-link, a {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 /* Remove transitions for immediate changes */
@@ -738,9 +743,10 @@ p, span, div, h1, h2, h3, h4, h5, h6 {
     padding: 25px !important;
 }
 
-/* Ensure containers don't overflow */
+/* Ensure containers don't overflow horizontally but allow vertical */
 .container, .container-xl {
-    overflow-x: hidden !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
 }
 
 /* Row spacing */
@@ -752,4 +758,59 @@ p, span, div, h1, h2, h3, h4, h5, h6 {
 .row > * {
     padding-left: 10px !important;
     padding-right: 10px !important;
+}
+
+/* Additional overflow fixes to prevent unwanted scroll boxes */
+.modal-content,
+.accordion-item,
+.accordion-body,
+.card-body,
+.card-header,
+.card-footer,
+.breadcrumb,
+.alert,
+.toast,
+.box,
+.pricing-card,
+.stat-card,
+.feature-box,
+.dashboard-card {
+    overflow: visible !important;
+}
+
+/* Keep overflow auto only where truly needed (horizontal scrolling tables) */
+.table-responsive {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+}
+
+/* Ensure dropdowns, tooltips, and popovers can display properly */
+.dropdown,
+.dropup,
+.dropend,
+.dropstart {
+    overflow: visible !important;
+}
+
+/* Fix for select elements and their dropdowns */
+.form-select,
+select {
+    overflow: visible !important;
+}
+
+/* Ensure modals and offcanvas can scroll their content properly */
+.modal-body,
+.offcanvas-body {
+    overflow-y: auto !important;
+    overflow-x: visible !important;
+}
+
+/* Fix progress bar overflow (needs to be hidden for rounded edges) */
+.progress {
+    overflow: hidden !important;
+}
+
+/* Ensure nav animations work smoothly */
+.nav-link {
+    overflow: visible !important;
 }
