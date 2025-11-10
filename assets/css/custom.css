@@ -104,6 +104,8 @@ body {
     backdrop-filter: blur(10px) !important;
     transition: all 0.3s ease !important;
     color: var(--light-text) !important;
+    min-height: 150px !important;
+    overflow: hidden !important;
 }
 
 .card:hover {
@@ -127,10 +129,16 @@ body {
 
 .card-body {
     color: var(--light-text) !important;
+    padding: 25px !important;
+    min-height: 100px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
 }
 
 .card-title {
     color: var(--light-text) !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
 }
 
 /* Navigation Bar */
@@ -230,6 +238,8 @@ body {
 .table {
     color: var(--light-text) !important;
     border-color: rgba(72, 177, 223, 0.2) !important;
+    table-layout: auto !important;
+    width: 100% !important;
 }
 
 .table thead th {
@@ -237,6 +247,8 @@ body {
     border-color: rgba(72, 177, 223, 0.2) !important;
     color: var(--primary-color) !important;
     font-weight: 600 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
 }
 
 .table tbody tr {
@@ -250,6 +262,9 @@ body {
 
 .table td {
     color: var(--light-text) !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 300px !important;
 }
 
 /* Badges */
@@ -476,7 +491,10 @@ a:hover {
     backdrop-filter: blur(10px) !important;
     border: 1px solid rgba(72, 177, 223, 0.2) !important;
     transition: all 0.3s ease !important;
-    height: 100% !important;
+    min-height: 350px !important;
+    height: auto !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
 }
 
 .pricing-card:hover {
@@ -491,6 +509,10 @@ a:hover {
     border-radius: var(--border-radius) !important;
     border: 1px solid rgba(72, 177, 223, 0.2) !important;
     transition: all 0.3s ease !important;
+    padding: 20px !important;
+    min-height: 120px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
 }
 
 .stat-card:hover,
@@ -577,6 +599,10 @@ hr {
     background: var(--card-bg) !important;
     border-radius: var(--border-radius) !important;
     border: 1px solid rgba(72, 177, 223, 0.2) !important;
+    padding: 20px !important;
+    min-height: 100px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
 }
 
 /* Dashboard Specific */
@@ -586,6 +612,9 @@ hr {
     border: 1px solid rgba(72, 177, 223, 0.2) !important;
     padding: 25px !important;
     transition: all 0.3s ease !important;
+    min-height: 150px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
 }
 
 .dashboard-card:hover {
@@ -632,4 +661,95 @@ button,
 input[type="submit"],
 input[type="button"] {
     transition: all 0.3s ease !important;
+}
+
+/* Global Text Overflow and Sizing Fixes */
+p, span, div, h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Ensure responsive column sizing */
+.col, .col-md-4, .col-md-6, .col-md-8, .col-md-12,
+.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12 {
+    min-width: 0 !important;
+}
+
+/* Fix for card-lg elements (like on the homepage) */
+.card-lg {
+    min-height: 200px !important;
+    padding: 30px !important;
+}
+
+.card-lg .card-body {
+    padding: 20px !important;
+    min-height: 120px !important;
+}
+
+/* Text truncation for long titles */
+.text-truncate {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+/* Better handling for breadcrumb overflow */
+.breadcrumb {
+    flex-wrap: wrap !important;
+}
+
+.breadcrumb-item {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Page title handling */
+.page-title {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* List group items */
+.list-group-item {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    padding: 15px !important;
+}
+
+/* Dropdown items */
+.dropdown-item {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+}
+
+/* Alert boxes */
+.alert {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    padding: 20px !important;
+}
+
+/* Modal content */
+.modal-body {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    padding: 25px !important;
+}
+
+/* Ensure containers don't overflow */
+.container, .container-xl {
+    overflow-x: hidden !important;
+}
+
+/* Row spacing */
+.row {
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+}
+
+.row > * {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
 }
