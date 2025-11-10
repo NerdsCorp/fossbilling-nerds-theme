@@ -1,8 +1,8 @@
 {
-    "name": "FOSSBilling Tide",
-    "version": "0.9.6",
-    "description": "Tide client area theme",
+    "name": "FOSSBilling NerdsCorp",
+    "version": "1.0.0",
+    "description": "NerdsCorp client area theme",
     "icon": "tide.png",
-    "author": "Tanglin",
-    "author_url": "https://tanglin.io/"
+    "author": "kristopher reeves",
+    "author_url": "www.nerdscorp.net"
 }
