@@ -2004,23 +2004,38 @@ select {
         margin: 12px 0 !important;
     }
 
-    /* Tables - enable horizontal scroll with better UX */
+    /* Tables - REMOVE horizontal scroll on invoice tables */
     .table-responsive {
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 8px;
         margin-bottom: 16px;
-        overflow-x: auto;
+        overflow-x: visible !important; /* Changed from auto to visible */
+        overflow-y: visible !important;
         -webkit-overflow-scrolling: touch;
     }
 
+    /* Remove minimum width constraint on mobile */
     .table {
         margin-bottom: 0 !important;
-        min-width: 600px; /* Ensure table has minimum width for proper display */
+        min-width: auto !important; /* Changed from 600px to auto */
+        width: 100% !important;
     }
 
-    /* Allow text wrapping in table cells on mobile */
-    .table .text-nowrap {
+    /* Force text wrapping in ALL table cells on mobile - override text-nowrap */
+    .table .text-nowrap,
+    .table td,
+    .table th {
         white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    /* Ensure invoice table containers don't cause horizontal scroll */
+    #invoices-table-unpaid,
+    #invoices-table-paid {
+        overflow-x: visible !important;
+        overflow-y: visible !important;
+        width: 100% !important;
     }
 
     /* Better table cell padding on mobile */
@@ -2055,14 +2070,42 @@ select {
         padding-right: 12px !important;
     }
 
-    /* Navbar dropdown improvements */
+    /* Navbar dropdown improvements - FIX SUPPORT BUTTON VISIBILITY */
     .navbar-nav .dropdown-menu {
         position: static !important;
         float: none !important;
         width: 100% !important;
+        max-width: 100% !important;
         margin-top: 0 !important;
         border: none !important;
         box-shadow: none !important;
+        left: 0 !important;
+        right: 0 !important;
+        transform: none !important;
+    }
+
+    /* Ensure support dropdown nav-item is visible and not clipped */
+    .navbar-nav .nav-item.dropdown {
+        position: relative !important;
+        overflow: visible !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Make sure dropdown toggle links are fully visible */
+    .navbar-nav .dropdown-toggle {
+        width: 100% !important;
+        text-align: left !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+    }
+
+    /* Ensure dropdown is shown when toggled */
+    .navbar-nav .dropdown-menu.show {
+        display: block !important;
+        position: static !important;
+        overflow: visible !important;
     }
 
     /* Card columns on mobile */
