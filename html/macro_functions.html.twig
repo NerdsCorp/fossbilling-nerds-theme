@@ -8,7 +8,7 @@
 {% endmacro %}
 
 {% macro selectboxtld(name, options, selected, required) %}
-    <select class="form-select" name="{{ name }}" {% if required %}required="required"{% endif%} style="width:80px;">
+    <select class="form-select" name="{{ name }}" {% if required %}required="required"{% endif%}>
         {% for data in options %}
         <option value="{{ data.tld }}" label="{{ data.tld }}" {% if selected == data.tld %}selected="selected"{% endif %}>{{ data.tld }}</option>
         {% endfor %}

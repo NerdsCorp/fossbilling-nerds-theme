@@ -42,7 +42,7 @@
                       <input type="text" name="domain[register_sld]" value="{{ request.register_sld }}" placeholder="{{ 'mydomain'|trans }}" class="form-control">
                    </div>
                    <div class="col-auto">
-                      <select name="domain[register_tld]" style="width: 150px" class="form-select">
+                      <select name="domain[register_tld]" class="form-select">
                          {% for tld in tlds%}
                          <option value="{{ tld.tld}}" label="{{ tld.tld}}">{{ tld.tld}}</option>
                          {% endfor %}

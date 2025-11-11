@@ -6,7 +6,7 @@
             
                 {% if product.allow_quantity_select %}
                     <label>{{ 'Quantity:'|trans }}
-                        <input type="text" name="quantity" value="1" style="width:30px;"/>
+                        <input type="number" name="quantity" value="1" min="1" class="form-control" style="width:60px; display:inline-block;"/>
                     </label>
                     <hr/>
                 {% endif %}
@@ -18,7 +18,7 @@
             {% if pricing.type == 'once'  %}
                 {% if product.allow_quantity_select %}
                     <label>{{ 'Quantity:'|trans }}
-                        <input type="text" name="quantity" value="1" style="width:30px;"/>
+                        <input type="number" name="quantity" value="1" min="1" class="form-control" style="width:60px; display:inline-block;"/>
                     </label>
                     <hr/>
                 {% endif %}
@@ -32,7 +32,7 @@
         
         {% if product.allow_quantity_select %}
             <label>{{ 'Quantity:'|trans }}
-                <input type="text" name="quantity" value="1" style="width:30px;"/>
+                <input type="number" name="quantity" value="1" min="1" class="form-control" style="width:60px; display:inline-block;"/>
             </label>
             <hr/>
         {% endif %}
