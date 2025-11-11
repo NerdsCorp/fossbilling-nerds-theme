@@ -1019,88 +1019,143 @@ select {
 
 /* ==== NAVBAR MOBILE OPTIMIZATION ==== */
 @media (max-width: 768px) {
+    /* Prevent horizontal overflow on body and page container */
+    html {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+    }
+
+    body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+    }
+
+    .page {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+    }
+
+    /* Fix sticky-top container */
+    .sticky-top {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+
     /* Mobile navbar adjustments */
     .navbar {
-        padding: 8px 12px !important;
+        padding: 8px 16px !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
     }
 
     /* Fix navbar main container to prevent overflow */
     .navbar > .container-xl {
         display: flex !important;
-        flex-wrap: wrap !important;
+        flex-wrap: nowrap !important;
         align-items: center !important;
         justify-content: space-between !important;
         width: 100% !important;
         padding: 0 !important;
         margin: 0 !important;
         max-width: 100% !important;
+        overflow-x: hidden !important;
     }
 
-    /* Navbar brand/logo sizing */
+    /* Navbar brand/logo sizing - reduce size on mobile */
     .navbar-brand {
-        font-size: 16px !important;
-        padding: 8px 0 !important;
+        font-size: 14px !important;
+        padding: 4px 0 !important;
         margin-right: 8px !important;
-        flex: 0 0 auto !important;
-        max-width: 50% !important;
+        flex: 0 1 auto !important;
+        max-width: 40% !important;
+        overflow: hidden !important;
     }
 
     .navbar-brand img {
-        max-height: 36px !important;
+        max-height: 32px !important;
         width: auto !important;
         max-width: 100% !important;
         object-fit: contain !important;
     }
 
-    /* Company name - hide on very small screens, truncate on medium mobile */
+    /* Company name - HIDE completely on mobile to save space */
     .navbar-text {
         display: none !important;
     }
 
-    /* Navbar toggler (hamburger menu) */
+    /* Navbar toggler (hamburger menu) - FIX THE BLOB ISSUE */
     .navbar-toggler {
         min-height: 44px !important;
         min-width: 44px !important;
-        padding: 10px !important;
+        padding: 8px !important;
         border: 2px solid var(--primary-color) !important;
         margin-left: auto !important;
         flex: 0 0 auto !important;
         order: 3 !important;
+        background: transparent !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
+    /* Fix hamburger icon - make it actually look like a hamburger */
     .navbar-toggler-icon {
         width: 24px !important;
         height: 24px !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%2348B1DF' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: 100% !important;
     }
 
-    /* Mobile menu (collapsed state) */
+    /* Mobile menu (collapsed state) - FIX HORIZONTAL SCROLLING */
     .navbar-collapse {
         background: rgba(0, 0, 0, 0.98) !important;
-        padding: 16px 0 !important;
+        padding: 16px !important;
         margin-top: 12px !important;
-        border-radius: var(--border-radius) !important;
-        border: 1px solid rgba(72, 177, 223, 0.2) !important;
+        margin-left: -16px !important;
+        margin-right: -16px !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-top: 1px solid rgba(72, 177, 223, 0.2) !important;
+        border-bottom: 1px solid rgba(72, 177, 223, 0.2) !important;
         flex-basis: 100% !important;
         order: 4 !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        position: relative !important;
+        left: 0 !important;
+        right: 0 !important;
     }
 
-    /* Remove nested container inside navbar-collapse */
+    /* Remove nested container inside navbar-collapse to prevent overflow */
     .navbar-collapse > .container-xl {
         padding: 0 !important;
         margin: 0 !important;
         max-width: 100% !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
     }
 
     /* Stack navbar items vertically on mobile */
     .navbar-nav {
         flex-direction: column !important;
         width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
 
     .navbar-nav .nav-item {
         width: 100% !important;
         margin: 0 !important;
         border-bottom: 1px solid rgba(72, 177, 223, 0.1) !important;
+        overflow-x: hidden !important;
     }
 
     .navbar-nav .nav-item:last-child {
@@ -1114,6 +1169,10 @@ select {
         display: flex !important;
         align-items: center !important;
         width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
     }
 
     /* Remove hover animation on mobile (conflicts with stacking) */
@@ -1121,24 +1180,31 @@ select {
         display: none !important;
     }
 
-    /* Dropdown menus in mobile nav */
+    /* Dropdown menus in mobile nav - prevent overflow */
     .dropdown-menu {
         position: static !important;
         float: none !important;
         width: 100% !important;
+        max-width: 100% !important;
         margin: 0 !important;
         border: none !important;
         border-radius: 0 !important;
         background: rgba(20, 20, 20, 0.9) !important;
+        overflow-x: hidden !important;
     }
 
     .dropdown-item {
         padding: 14px 32px !important;
         min-height: 52px !important;
         font-size: 15px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
     }
 
-    /* Right-side navbar items (buttons, user menu) */
+    /* Right-side navbar items (buttons, user menu) - prevent overflow */
     .navbar-nav.flex-row.order-md-last {
         flex-direction: column !important;
         align-items: flex-start !important;
@@ -1146,6 +1212,8 @@ select {
         padding: 12px 0 !important;
         border-top: 1px solid rgba(72, 177, 223, 0.2) !important;
         width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
 
     /* Language selector and buttons container */
@@ -1195,37 +1263,66 @@ select {
 
 /* Very small screens - further optimizations */
 @media (max-width: 480px) {
+    /* Even stricter overflow prevention */
+    html, body, .page, .sticky-top {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
     .navbar {
-        padding: 6px 10px !important;
+        padding: 6px 12px !important;
     }
 
     .navbar-brand {
-        max-width: 60% !important;
-        font-size: 14px !important;
+        max-width: 50% !important;
+        font-size: 13px !important;
     }
 
     .navbar-brand img {
-        max-height: 32px !important;
+        max-height: 28px !important;
     }
 
     .navbar-toggler {
         min-height: 40px !important;
         min-width: 40px !important;
-        padding: 8px !important;
+        padding: 6px !important;
+    }
+
+    .navbar-toggler-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    /* Reduce menu padding on very small screens */
+    .navbar-nav .nav-link {
+        padding: 14px 16px !important;
+        font-size: 15px !important;
+    }
+
+    .dropdown-item {
+        padding: 12px 24px !important;
+        font-size: 14px !important;
     }
 }
 
 /* ==== ANNOUNCEMENT BAR MOBILE OPTIMIZATION ==== */
 @media (max-width: 768px) {
-    /* Announcement bar at top of navbar */
+    /* Announcement bar at top of navbar - prevent overflow */
     .sticky-top > header.navbar:first-child {
-        padding: 12px !important;
+        padding: 12px 16px !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
     }
 
     .sticky-top > header.navbar .container-xl {
-        padding: 0 8px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
+        overflow-x: hidden !important;
     }
 
     /* Ensure announcement text wraps and doesn't overflow */
@@ -1236,10 +1333,16 @@ select {
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
         white-space: normal !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
 }
 
 @media (max-width: 480px) {
+    .sticky-top > header.navbar:first-child {
+        padding: 10px 12px !important;
+    }
+
     .sticky-top > header.navbar strong {
         font-size: 13px !important;
     }
