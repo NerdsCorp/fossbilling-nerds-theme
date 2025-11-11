@@ -1021,19 +1021,40 @@ select {
 @media (max-width: 768px) {
     /* Mobile navbar adjustments */
     .navbar {
-        padding: 8px 16px !important;
+        padding: 8px 12px !important;
+    }
+
+    /* Fix navbar main container to prevent overflow */
+    .navbar > .container-xl {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
     }
 
     /* Navbar brand/logo sizing */
     .navbar-brand {
-        font-size: 18px !important;
+        font-size: 16px !important;
         padding: 8px 0 !important;
-        margin-right: 0 !important;
+        margin-right: 8px !important;
+        flex: 0 0 auto !important;
+        max-width: 50% !important;
     }
 
     .navbar-brand img {
-        max-height: 40px !important;
+        max-height: 36px !important;
         width: auto !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    /* Company name - hide on very small screens, truncate on medium mobile */
+    .navbar-text {
+        display: none !important;
     }
 
     /* Navbar toggler (hamburger menu) */
@@ -1043,6 +1064,8 @@ select {
         padding: 10px !important;
         border: 2px solid var(--primary-color) !important;
         margin-left: auto !important;
+        flex: 0 0 auto !important;
+        order: 3 !important;
     }
 
     .navbar-toggler-icon {
@@ -1057,6 +1080,15 @@ select {
         margin-top: 12px !important;
         border-radius: var(--border-radius) !important;
         border: 1px solid rgba(72, 177, 223, 0.2) !important;
+        flex-basis: 100% !important;
+        order: 4 !important;
+    }
+
+    /* Remove nested container inside navbar-collapse */
+    .navbar-collapse > .container-xl {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
     }
 
     /* Stack navbar items vertically on mobile */
@@ -1106,11 +1138,110 @@ select {
         font-size: 15px !important;
     }
 
-    /* Right-side navbar items */
-    .navbar-nav.ms-auto {
-        margin-top: 12px !important;
-        padding-top: 12px !important;
+    /* Right-side navbar items (buttons, user menu) */
+    .navbar-nav.flex-row.order-md-last {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        margin: 0 !important;
+        padding: 12px 0 !important;
         border-top: 1px solid rgba(72, 177, 223, 0.2) !important;
+        width: 100% !important;
+    }
+
+    /* Language selector and buttons container */
+    .nav-item.d-none.d-md-flex {
+        display: flex !important;
+        width: 100% !important;
+        margin-bottom: 12px !important;
+    }
+
+    .nav-item .btn-list {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 8px !important;
+    }
+
+    .nav-item .btn-list .btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    /* User dropdown on mobile */
+    .nav-item.dropdown {
+        width: 100% !important;
+    }
+
+    .nav-item.dropdown > .nav-link {
+        padding: 16px 20px !important;
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Theme toggle buttons on mobile */
+    .d-none.d-md-flex.me-3 {
+        display: flex !important;
+        justify-content: center !important;
+        padding: 12px 0 !important;
+        gap: 16px !important;
+    }
+
+    .d-none.d-md-flex.me-3 a {
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+}
+
+/* Very small screens - further optimizations */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 6px 10px !important;
+    }
+
+    .navbar-brand {
+        max-width: 60% !important;
+        font-size: 14px !important;
+    }
+
+    .navbar-brand img {
+        max-height: 32px !important;
+    }
+
+    .navbar-toggler {
+        min-height: 40px !important;
+        min-width: 40px !important;
+        padding: 8px !important;
+    }
+}
+
+/* ==== ANNOUNCEMENT BAR MOBILE OPTIMIZATION ==== */
+@media (max-width: 768px) {
+    /* Announcement bar at top of navbar */
+    .sticky-top > header.navbar:first-child {
+        padding: 12px !important;
+    }
+
+    .sticky-top > header.navbar .container-xl {
+        padding: 0 8px !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    /* Ensure announcement text wraps and doesn't overflow */
+    .sticky-top > header.navbar strong {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        display: block !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .sticky-top > header.navbar strong {
+        font-size: 13px !important;
     }
 }
 
