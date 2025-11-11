@@ -96,6 +96,47 @@ body {
     transform: translateY(-2px) !important;
 }
 
+/* Ensure all button text has high contrast */
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-info {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn-outline-primary,
+.btn-outline-secondary {
+    color: var(--primary-color) !important;
+    text-shadow: none !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Button states with strong contrast */
+.btn:focus,
+.btn:active,
+.btn.active {
+    color: #ffffff !important;
+}
+
+/* Dropdown toggle buttons */
+.dropdown-toggle {
+    color: var(--light-text) !important;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+    color: var(--primary-color) !important;
+}
+
 /* Cards with Rounded Edges */
 .card {
     background: var(--card-bg) !important;
@@ -149,6 +190,18 @@ body {
     transition: all 0.3s ease !important;
 }
 
+/* Header z-index to ensure elements appear on top */
+.header,
+header {
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+.navbar-expand-md {
+    position: relative !important;
+    z-index: 999 !important;
+}
+
 .navbar-brand {
     color: var(--primary-color) !important;
     font-weight: 700 !important;
@@ -196,6 +249,15 @@ body {
     max-height: none !important;
     margin-top: 8px !important;
     padding: 8px 0 !important;
+    z-index: 1050 !important;
+    position: absolute !important;
+}
+
+/* Ensure dropdown containers have proper positioning */
+.dropdown,
+.nav-item.dropdown {
+    position: relative !important;
+    z-index: 1001 !important;
 }
 
 .dropdown-item {
@@ -767,6 +829,31 @@ p, span, div, h1, h2, h3, h4, h5, h6 {
 .container, .container-xl {
     overflow-x: visible !important;
     overflow-y: visible !important;
+}
+
+/* Fix panels and cards to prevent overflow */
+.row-deck .col-sm-6,
+.row-deck .col-lg-4,
+.row-deck .col-md-4,
+.row-deck .col-md-6,
+.row-deck .col-md-8 {
+    min-width: 0 !important;
+    padding: 10px !important;
+}
+
+.row-deck {
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+}
+
+/* Ensure card content stays within bounds */
+.card-sm {
+    min-height: 120px !important;
+}
+
+.card-sm .card-body {
+    padding: 15px !important;
+    min-height: 80px !important;
 }
 
 /* Row spacing */
