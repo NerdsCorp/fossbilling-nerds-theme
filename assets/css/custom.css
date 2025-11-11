@@ -205,6 +205,24 @@ header {
 .navbar-brand {
     color: var(--primary-color) !important;
     font-weight: 700 !important;
+    margin-right: 1rem !important;
+}
+
+/* Unified navbar layout */
+.navbar .navbar-collapse .container-xl {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+.navbar .navbar-nav {
+    flex-direction: row !important;
+    align-items: center !important;
+}
+
+/* Ensure proper spacing for navbar items */
+.navbar .navbar-nav .nav-item {
+    margin-right: 0.5rem !important;
 }
 
 .nav-link {

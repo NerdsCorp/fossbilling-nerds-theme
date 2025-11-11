@@ -83,99 +83,17 @@
                   <span class="navbar-toggler-icon"></span>
                   </button>
 				  {% if settings.show_company_logo %}
-                  <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                  <h1 class="navbar-brand navbar-brand-autodark pe-0 pe-md-3">
                      <a href="{{'/'|link }}">
                      <img src="{{company.logo_url}}" alt="{{company.name}}" class="navbar-brand-image">
                      </a>
                   </h1>
 				  {% endif %}
 				  {% if settings.show_company_name %}
-				  <p class="mt-3 text-info">{{company.name}}</p>
-				  {% endif %}				  
-                  <div class="navbar-nav flex-row order-md-last">
-                     <div class="nav-item d-none d-md-flex me-3">
-                        <div class="btn-list">
-                           {% set languages = guest.extension_languages(true) %}
-                           {% if languages|length > 1 %}
-                           {% set currentLang = guest.system_locale %}
-                           {% set countryCode = currentLang | slice(3, 2) %}
-                           <div class="dropdown">
-                              <a href="#" class="btn dropdown-toggle" data-bs-toggle="dropdown"><span class="flag flag-country-{{ countryCode | lower }}"></span>&nbsp;{% for lang in languages %}
-                              {% if lang.locale == currentLang %}
-                              {{ lang.title }}
-                              {% endif %}
-                              {% endfor %}</a>
-                              <div class="dropdown-menu">
-                                 {% for lang in languages %}
-                                 {% set countryCode = lang.locale | slice(3, 2) %}
-                                 {% if lang != currentLang %}
-                                 <a href="javascript:;" class="dropdown-item language_selector" data-language-code="{{ lang.locale }}"><span class="flag flag-country-{{ countryCode | lower }}"></span>&nbsp;{{ lang.title }}</a>
-                                 {% endif %}
-                                 {% endfor %}
-                              </div>
-                           </div>
-                           {% endif %}
-                           {% if not client %}
-                           <a href="{{ 'login'|link }}" class="btn btn-secondary">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                 <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
-                                 <path d="M20 12h-13l3 -3m0 6l-3 -3"></path>
-                              </svg>
-                              {{ 'Login'|trans }}
-                           </a>
-                           <a href="{{ 'signup'|link }}" class="btn btn-primary">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                 <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                 <path d="M16 19h6"></path>
-                                 <path d="M19 16v6"></path>
-                                 <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
-                              </svg>
-                              {{ 'Register'|trans }}
-                           </a>
-                           {% endif %}
-                        </div>
-                     </div>
-                     <div class="d-none d-md-flex me-3">
-                        <a href="?theme=dark" class="nav-link px-0 hide-theme-dark js-theme-toggler" title="Enable dark mode" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                           <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
-                           </svg>
-                        </a>
-                        <a href="?theme=light" class="nav-link px-0 hide-theme-light js-theme-toggler" title="Enable light mode" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                           <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                           <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
-                           </svg>
-                        </a>
-                     </div>
-                     {% if client %}
-                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                           <span class="avatar avatar-sm" style="background-image: url({{ profile.email|gravatar(60) }})"></span>
-                           <div class="d-none d-xl-block ps-2">
-                              <div>Welcome, {{profile.first_name}}</div>
-                              <div class="mt-1 small text-muted">Balance: {{ profile.balance | money(profile.currency) }}</div>
-                           </div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                           <a href="{{ 'client/profile' | link}}" class="dropdown-item">{{ 'Profile'|trans }}</a>
-                           <a href="{{ '/email'|link }}" class="dropdown-item">{{ 'Emails'|trans }}</a>
-                           <a href="{{ 'client/logout' | link}}" class="dropdown-item">{{ 'Sign out'|trans }}</a>
-                        </div>
-                     </div>
-                     {% endif %}
-                  </div>
-               </div>
-            </header>
-            <header class="navbar-expand-md d-print-none">
-               <div class="collapse navbar-collapse" id="navbar-menu">
-                  <div class="navbar">
+				  <span class="navbar-text me-3 text-info">{{company.name}}</span>
+				  {% endif %}
+
+				  <div class="collapse navbar-collapse" id="navbar-menu">
                      <div class="container-xl">
                         <ul class="navbar-nav">
 						   {% if settings.main_menu_home %}
@@ -391,6 +309,86 @@
                            {% endif %}
                            {% endif %}
                         </ul>
+
+                        <div class="navbar-nav flex-row order-md-last ms-auto">
+                           <div class="nav-item d-none d-md-flex me-3">
+                              <div class="btn-list">
+                                 {% set languages = guest.extension_languages(true) %}
+                                 {% if languages|length > 1 %}
+                                 {% set currentLang = guest.system_locale %}
+                                 {% set countryCode = currentLang | slice(3, 2) %}
+                                 <div class="dropdown">
+                                    <a href="#" class="btn dropdown-toggle" data-bs-toggle="dropdown"><span class="flag flag-country-{{ countryCode | lower }}"></span>&nbsp;{% for lang in languages %}
+                                    {% if lang.locale == currentLang %}
+                                    {{ lang.title }}
+                                    {% endif %}
+                                    {% endfor %}</a>
+                                    <div class="dropdown-menu">
+                                       {% for lang in languages %}
+                                       {% set countryCode = lang.locale | slice(3, 2) %}
+                                       {% if lang != currentLang %}
+                                       <a href="javascript:;" class="dropdown-item language_selector" data-language-code="{{ lang.locale }}"><span class="flag flag-country-{{ countryCode | lower }}"></span>&nbsp;{{ lang.title }}</a>
+                                       {% endif %}
+                                       {% endfor %}
+                                    </div>
+                                 </div>
+                                 {% endif %}
+                                 {% if not client %}
+                                 <a href="{{ 'login'|link }}" class="btn btn-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                       <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+                                       <path d="M20 12h-13l3 -3m0 6l-3 -3"></path>
+                                    </svg>
+                                    {{ 'Login'|trans }}
+                                 </a>
+                                 <a href="{{ 'signup'|link }}" class="btn btn-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                       <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                                       <path d="M16 19h6"></path>
+                                       <path d="M19 16v6"></path>
+                                       <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
+                                    </svg>
+                                    {{ 'Register'|trans }}
+                                 </a>
+                                 {% endif %}
+                              </div>
+                           </div>
+                           <div class="d-none d-md-flex me-3">
+                              <a href="?theme=dark" class="nav-link px-0 hide-theme-dark js-theme-toggler" title="Enable dark mode" data-bs-toggle="tooltip"
+                              data-bs-placement="bottom">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                 <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+                                 </svg>
+                              </a>
+                              <a href="?theme=light" class="nav-link px-0 hide-theme-light js-theme-toggler" title="Enable light mode" data-bs-toggle="tooltip"
+                              data-bs-placement="bottom">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                 <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                 <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
+                                 </svg>
+                              </a>
+                           </div>
+                           {% if client %}
+                           <div class="nav-item dropdown">
+                              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                                 <span class="avatar avatar-sm" style="background-image: url({{ profile.email|gravatar(60) }})"></span>
+                                 <div class="d-none d-xl-block ps-2">
+                                    <div>Welcome, {{profile.first_name}}</div>
+                                    <div class="mt-1 small text-muted">Balance: {{ profile.balance | money(profile.currency) }}</div>
+                                 </div>
+                              </a>
+                              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                 <a href="{{ 'client/profile' | link}}" class="dropdown-item">{{ 'Profile'|trans }}</a>
+                                 <a href="{{ '/email'|link }}" class="dropdown-item">{{ 'Emails'|trans }}</a>
+                                 <a href="{{ 'client/logout' | link}}" class="dropdown-item">{{ 'Sign out'|trans }}</a>
+                              </div>
+                           </div>
+                           {% endif %}
+                        </div>
                      </div>
                   </div>
                </div>
