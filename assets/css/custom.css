@@ -667,8 +667,9 @@ a:hover {
     flex-shrink: 0 !important;
     display: inline-block !important;
     vertical-align: middle !important;
-    width: 1.5rem !important;
-    height: 1.5rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    padding: 0 !important;
 }
 
 /* Navbar icon container */
@@ -678,15 +679,16 @@ a:hover {
     justify-content: center !important;
     flex-shrink: 0 !important;
     margin-right: 0.25rem !important;
-    width: 1.5rem !important;
-    height: 1.5rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    padding: 0 !important;
 }
 
 /* Ensure navbar links have proper flex layout for icons */
 .navbar-nav .nav-link {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 0.5rem !important;
+    gap: 0.25rem !important;
 }
 
 /* Status Indicators */
@@ -1186,12 +1188,12 @@ select {
     }
 
     .navbar-nav .nav-link {
-        padding: 12px 16px !important;
-        min-height: 48px !important;
-        font-size: 15px !important;
+        padding: 10px 12px !important;
+        min-height: 44px !important;
+        font-size: 14px !important;
         display: flex !important;
         align-items: center !important;
-        gap: 0.5rem !important;
+        gap: 0.25rem !important;
         width: 100% !important;
         max-width: 100% !important;
         overflow: visible !important;
@@ -1199,18 +1201,20 @@ select {
         text-overflow: ellipsis !important;
     }
 
-    /* Mobile navbar icon sizing - smaller icons */
+    /* Mobile navbar icon sizing - very small icons without padding */
     .navbar-nav .nav-link .nav-link-icon {
         flex-shrink: 0 !important;
-        width: 1rem !important;
-        height: 1rem !important;
-        margin-right: 0.5rem !important;
+        width: 0.75rem !important;
+        height: 0.75rem !important;
+        margin-right: 0.25rem !important;
+        padding: 0 !important;
     }
 
     .navbar-nav .nav-link .icon {
         flex-shrink: 0 !important;
-        width: 1rem !important;
-        height: 1rem !important;
+        width: 0.75rem !important;
+        height: 0.75rem !important;
+        padding: 0 !important;
     }
 
     /* Remove hover animation on mobile (conflicts with stacking) */
