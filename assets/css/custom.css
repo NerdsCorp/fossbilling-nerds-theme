@@ -1206,7 +1206,7 @@ select {
         flex-shrink: 0 !important;
         width: 1rem !important;
         height: 1rem !important;
-        margin-right: 0.5rem !important;
+        margin-right: 0 !important;
         padding: 0 !important;
     }
 
@@ -1215,6 +1215,16 @@ select {
         width: 1rem !important;
         height: 1rem !important;
         padding: 0 !important;
+    }
+
+    /* Hide navigation text on mobile - show icons only */
+    .navbar-nav .nav-link .nav-link-title {
+        display: none !important;
+    }
+
+    /* Center icons in mobile nav links */
+    .navbar-nav .nav-link {
+        justify-content: center !important;
     }
 
     /* Remove hover animation on mobile (conflicts with stacking) */
