@@ -664,6 +664,29 @@ a:hover {
 /* Icons */
 .icon {
     color: var(--primary-color) !important;
+    flex-shrink: 0 !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+}
+
+/* Navbar icon container */
+.nav-link-icon {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    margin-right: 0.5rem !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+}
+
+/* Ensure navbar links have proper flex layout for icons */
+.navbar-nav .nav-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
 }
 
 /* Status Indicators */
@@ -1168,11 +1191,25 @@ select {
         font-size: 16px !important;
         display: flex !important;
         align-items: center !important;
+        gap: 0.75rem !important;
         width: 100% !important;
         max-width: 100% !important;
-        overflow-x: hidden !important;
+        overflow: visible !important;
         white-space: nowrap !important;
         text-overflow: ellipsis !important;
+    }
+
+    /* Mobile navbar icon sizing */
+    .navbar-nav .nav-link .nav-link-icon {
+        flex-shrink: 0 !important;
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+    }
+
+    .navbar-nav .nav-link .icon {
+        flex-shrink: 0 !important;
+        width: 1.5rem !important;
+        height: 1.5rem !important;
     }
 
     /* Remove hover animation on mobile (conflicts with stacking) */
