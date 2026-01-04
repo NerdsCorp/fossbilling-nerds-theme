@@ -1,5 +1,11 @@
 # Nerds Theme for FOSSBilling
 
+<img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/2c317a38-3c15-4fda-9797-3c91b8485183" />
+<img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/d05ac550-fbb9-4dc5-a9bf-a9050f622cd5" />
+<img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/541cb0a3-4925-4ca5-983d-68a546c00012" />
+
+
+
 ## Overview
 
 Nerds Theme is a client area theme for FOSSBilling. It's designed to enhance your user interface with a clean, modern aesthetic. This guide provides steps on how to install, upgrade, secure, and customize the Nerds theme.
